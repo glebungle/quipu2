@@ -45,7 +45,7 @@ function App() {
       <button onClick={() => {
         const newTitle = document.getElementById('newTitle').value;
         if (!newTitle) {
-          alert('제목을 입력해주세요!');
+          alert('제목을 입력해주세요!!!');
           return;
         }
         글제목변경([newTitle, ...글제목]);
