@@ -33,7 +33,7 @@ function App() {
           }} value={입력값} placeholder="제목을 입력하세요" />
           <button onClick={(e)=>{
             if (입력값.trim() === '') {
-              alert("제목을 입력하세요!");
+              alert("제목을 입력하세요!!");
             } else {
               let copy글제목 = [...글제목];
               let copy좋아요 = [...좋아요];
