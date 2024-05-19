@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/quipu2/static/css/main.021c360f.css",
-    "main.js": "/quipu2/static/js/main.bbe98436.js",
+    "main.js": "/quipu2/static/js/main.8131e5ef.js",
     "static/js/453.2a0bb60a.chunk.js": "/quipu2/static/js/453.2a0bb60a.chunk.js",
     "index.html": "/quipu2/index.html",
     "main.021c360f.css.map": "/quipu2/static/css/main.021c360f.css.map",
-    "main.bbe98436.js.map": "/quipu2/static/js/main.bbe98436.js.map",
+    "main.8131e5ef.js.map": "/quipu2/static/js/main.8131e5ef.js.map",
     "453.2a0bb60a.chunk.js.map": "/quipu2/static/js/453.2a0bb60a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.021c360f.css",
-    "static/js/main.bbe98436.js"
+    "static/js/main.8131e5ef.js"
   ]
 }
