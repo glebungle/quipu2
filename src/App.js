@@ -1,108 +1,101 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
 function App() {
-  let [블로그명] = useState('찐빵 블로그');
-  let [글제목, 글제목변경] = useState(['굿즈 추천', '영화 추천', '노래 추천']);
-  let [따봉, 따봉변경] = useState([0, 0, 0]);
+  let [글제목, 글제목변경] = useState(['영화 추천', '맛집 추천', '노래 추천']);
+  let [좋아요, 좋아요변경] = useState([0, 0, 0]);
   let [싫어요, 싫어요변경] = useState([0, 0, 0]);
   let [모달, 모달변경] = useState(false);
-  let [선택된글, 선택된글변경] = useState(0);
+  let [선택, 선택변경] = useState('');
+  let [입력값, 입력값변경] = useState('');
 
-  const toggleModal = (index) => {
-    if (선택된글 === index && 모달) {
-      모달변경(false);
-    } else {
-      선택된글변경(index);
-      모달변경(true);
-    }
-  };
 
   return (
-    <div className="App">
-      <div className="black-nav">
-        <h4>{ 블로그명 }</h4>
+    <div className="Container">
+      <div className="nav">
+        <h3>찐빵 블로그</h3>
+      </div>
+      <div className="list-container">
+        {
+        글제목.map((element, count) => (
+          <List key={count} index={count} 글제목={글제목} 글제목변경={글제목변경}
+            좋아요={좋아요} 좋아요변경={좋아요변경}
+            싫어요={싫어요} 싫어요변경={싫어요변경}
+            모달={모달} 모달변경={모달변경}
+            선택={선택} 선택변경={선택변경} />
+        ))
+      }
+      </div>
+      <div className="input-modal-container">
+        <div className="input-container">
+          <input onChange={(e)=>{
+            입력값변경(e.target.value);
+          }} value={입력값} placeholder="제목을 입력하세요" />
+          <button onClick={(e)=>{
+            if (입력값.trim() === '') {
+              alert("제목을 입력하세요!");
+            } else {
+              let copy글제목 = [...글제목];
+              let copy좋아요 = [...좋아요];
+              let copy싫어요 = [...싫어요];
+              copy글제목.unshift(입력값);
+              copy좋아요.unshift(0);
+              copy싫어요.unshift(0);
+              글제목변경(copy글제목);
+              좋아요변경(copy좋아요);
+              싫어요변경(copy싫어요);
+              입력값변경('');
+            }
+          }}>저장</button>
+        </div>
+        {모달 && <Modal 선택={글제목[선택]} />}
       </div>
 
-      <div>
-      { 글제목.map((title, index) => (
-        <List
-          title={title}
-          index={index}
-          따봉={따봉}
-          따봉변경={따봉변경}
-          글제목={글제목}
-          글제목변경={글제목변경}
-          싫어요={싫어요}
-          싫어요변경={싫어요변경}
-          toggleModal={toggleModal}
-        />
-      ))}
-      </div>
-      <div>
-        <input type="text" id="newTitle" placeholder="제목을 입력하세요" />
-      <button onClick={() => {
-        const newTitle = document.getElementById('newTitle').value;
-        if (!newTitle) {
-          alert('제목을 입력해주세요!!!');
-          return;
-        }
-        글제목변경([newTitle, ...글제목]);
-        따봉변경([0, ...따봉]);
-        싫어요변경([0, ...싫어요]);
-      
-      }}>저장</button>
-      </div>
-      {모달 && <Modal 글제목={글제목} 선택된글={선택된글} />}
     </div>
   );
 }
 
-function List({ title, index, 따봉, 따봉변경, 글제목, 글제목변경, 싫어요, 싫어요변경, toggleModal }) {
-  const Like = () => {
-    const Likes = [...따봉];
-    Likes[index] += 1;
-    따봉변경(Likes);
-  };
-
-  const Dislike = () => {
-    const Dislikes = [...싫어요];
-    Dislikes[index] += 1;
-    싫어요변경(Dislikes);
-  };
-
-  const Delete = () => {
-    const Titles = [...글제목];
-    Titles.splice(index, 1);
-    const onRemove = (index) => {
-
-      글제목변경(글제목.filter((_, i) => i !== index));
-  
-    };
-    글제목변경(Titles);
-    따봉변경(따봉.filter((_, i) => i !== index));
-    싫어요변경(싫어요.filter((_, i) => i !== index));
-  };
-
-  return (
-    <div className="list">
-      <h4 onClick={() => toggleModal(index)}>{ title }
-        <span onClick={(e) => { e.stopPropagation(); Like(); }}>👍</span> {따봉[index]}
-        <span onClick={(e) => { e.stopPropagation(); Dislike(); }}>👎</span> {싫어요[index]}
-      </h4>
-      <p>2월 17일 발행</p>
-      <button onClick={Delete}>삭제</button>
-    </div>
-  );
-}
-
-function Modal({ 글제목, 선택된글 }) {
+function Modal({ 선택 }) {
   return (
     <div className="modal">
-      <h4>{ 글제목[선택된글] }</h4>
-      <p>2월 17일 발행</p>
-      <p>상세내용</p>
+      <h4>{선택}</h4>
+      <p>12월 12일</p>
+      <p>블라블라</p>
+    </div>
+  );
+}
+
+function List(props) {
+  return (
+    <div className="list">
+      <h4 onClick={() => {
+        props.모달변경(!props.모달);
+        props.선택변경(props.글제목[props.index]);
+      }}>{props.글제목[props.index]}</h4>
+      <span onClick={(e) => {
+        e.stopPropagation();
+        let copy좋아요 = [...props.좋아요];
+        copy좋아요[props.index] += 1;
+        props.좋아요변경(copy좋아요);
+      }}>👍{props.좋아요[props.index]}</span>
+      <span onClick={(e) => {
+        e.stopPropagation();
+        let copy싫어요 = [...props.싫어요];
+        copy싫어요[props.index] += 1;
+        props.싫어요변경(copy싫어요);
+      }}>👎{props.싫어요[props.index]}</span>
+      <p>12월 12일 발행</p>
+      <button onClick={() => {
+        let copy글제목 = [...props.글제목];
+        let copy싫어요 = [...props.싫어요];
+        let copy좋아요 = [...props.좋아요];
+        copy글제목.splice(props.index, 1);
+        copy싫어요.splice(props.index, 1);
+        copy좋아요.splice(props.index, 1);
+        props.글제목변경(copy글제목);
+        props.싫어요변경(copy싫어요);
+        props.좋아요변경(copy좋아요);
+      }}>삭제</button>
     </div>
   );
 }

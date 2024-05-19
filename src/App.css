@@ -1,29 +1,102 @@
-.App {
-  text-align: center;
-}
-
-.black-nav{
+.Container {
+  background-color: #ffedf6;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  position: relative;
   display: flex;
-  background: black;
-  width:100%;
-  color: white;
-  padding-left:20px
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+  padding-top: 80px; /* nav height + margin */
 }
 
-div{
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: rgb(255, 203, 225);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  font-family: 'NPSfontBold';
+  z-index: 1000;
+}
+
+div {
   box-sizing: border-box;
 }
-.list{
+
+.list-container {
+  width: 60%; /* Adjust width as needed */
+}
+
+.list {
+  font-family: 'SUITE-Regular';
+  position: relative;
   padding-left: 20px;
   text-align: left;
   border-bottom: 1px solid grey;
-  width: 50%
+  width: 90%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+  margin-bottom: 20px;
 }
 
-.modal{
-  margin-top: 20px;
-  padding:20px;
-  background: #eee;
-  text-align:left;
+.input-modal-container {
+  width: 40%; /* Adjust width as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.input-container {
+  font-family: 'SUITE-Regular';
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-container input {
+  font-family: 'SUITE-Regular';
+  margin-right: 10px;
+  width: 70%;
+  padding: 10px;
+}
+
+.input-container button {
+  padding: 10px;
+}
+
+.modal {
+  font-family: 'SUITE-Regular';
+  width: 90%;
+  padding: 20px;
+  background: #ffffff;
+  text-align: left;
+  border-radius: 8px;
+  border: 3px solid rgb(255, 203, 225);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@font-face {
+  font-family: 'NPSfontBold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
